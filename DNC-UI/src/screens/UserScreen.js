@@ -43,9 +43,9 @@ const UserScreen = ({ navigation }) => {
   return (
     
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      
       <Logo />
-      <Header>Create Account</Header>
+      <Header>Create User Account</Header>
 	  <TextInput
         label="Client Name"
         returnKeyType="next"

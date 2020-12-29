@@ -56,14 +56,18 @@ const LoginScreen = ({ navigation }) => {
    .then((responseJson) => {
       console.log(responseJson);
       console.log(responseJson.message);
-      if (responseJson.message== 'Welcome Admin')
+      
+      const result="Welcome Admin"
+      
+      
+      if (responseJson.message===result)
        {
     navigation.reset({
       index: 0,
       routes: [{ name: 'RegisterScreen' }],
        })
       }
-  else (responseJson.message=='Welcome User')
+  else 
    {
     navigation.reset({
       index: 0,

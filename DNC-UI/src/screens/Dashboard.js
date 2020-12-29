@@ -10,8 +10,7 @@ const Dashboard = ({ navigation }) => (
     <Logo />
     <Header>Let’s start</Header>
     <Paragraph>
-      Your amazing app starts here. Open you favorite code editor and start
-      editing this project.
+      
     </Paragraph>
     <Button
       mode="outlined"

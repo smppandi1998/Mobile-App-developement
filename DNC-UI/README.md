@@ -1,15 +1,10 @@
-# React Native Login Template
+# DNC UI
 
-This repo is proudly sponsored by:
 
-<a href="https://reactnativemarket.com/" rel="nofollow" target="_blank">
-  <img src="https://raw.githubusercontent.com/venits/react-native-market/master/assets/banner.png" width="280"><br />
-  React Native Templates & Starter Kits and Apps for easier start.
-</a>
 
-## Demo
 
-https://simple-login-template.web.app
+
+
 
 ## How to use?
 
@@ -33,11 +28,11 @@ yarn install
 
 ## Preview
 
-![homescreen](https://raw.githubusercontent.com/venits/react-native-market/master/assets/simple-login-template/homescreen.png)
-![login](https://raw.githubusercontent.com/venits/react-native-market/master/assets/simple-login-template/login.png)
-![register](https://raw.githubusercontent.com/venits/react-native-market/master/assets/simple-login-template/register.png)
-![forgot](https://raw.githubusercontent.com/venits/react-native-market/master/assets/simple-login-template/forgot.png)
-![dashboard](https://raw.githubusercontent.com/venits/react-native-market/master/assets/simple-login-template/dashboard.png)
+![homescreen](https://raw.githubusercontent.com/smppandi1998/Mobile-App-developement/main/DNC-UI/assets/index.png)
+![login](https://raw.githubusercontent.com/smppandi1998/Mobile-App-developement/main/DNC-UI/assets/login.png)
+![register](https://raw.githubusercontent.com/smppandi1998/Mobile-App-developement/main/DNC-UI/assets/adminsignup.png)
+![forgot](https://raw.githubusercontent.com/smppandi1998/Mobile-App-developement/main/DNC-UI/assets/forgetpassword.png)
+
 
 ## Support
 

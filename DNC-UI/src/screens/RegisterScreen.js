@@ -34,6 +34,26 @@ const RegisterScreen = ({ navigation }) => {
     console.log(password.value);
     console.log(email.value);
     console.log(Orgname.value);
+    const proxyurl = "https://cors-anywhere.herokuapp.com/";
+    const url = "https://staging-iseechange.mcci.mobi/dncbe/asignup";
+    fetch(proxyurl + url, {  
+  method: 'POST',
+  headers: {
+    'Accept': 'application/json',
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    oname: Orgname.value,
+    uname: Username.value,
+    pwd : password.value,
+    email : email.value,
+  })
+}).then(function(response){ 
+  return response.json();   
+ })
+ .then(function(data){ 
+ console.log(data)
+ });
     navigation.reset({
       index: 0,
       routes: [{ name: 'Dashboard' }],
@@ -43,9 +63,9 @@ const RegisterScreen = ({ navigation }) => {
   return (
     
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      
       <Logo />
-      <Header>Create Account</Header>
+      <Header>Create Admin Account</Header>
 	  <TextInput
         label="Organization Name"
         returnKeyType="next"
