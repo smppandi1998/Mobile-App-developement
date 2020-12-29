@@ -83,7 +83,7 @@ const LoginScreen = ({ navigation }) => {
   return (
   
     <Background>
-      <BackButton goBack={navigation.goBack} />
+      
 	 
 	
       <Logo />
