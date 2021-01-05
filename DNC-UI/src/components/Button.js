@@ -21,13 +21,10 @@ const styles = StyleSheet.create({
   button: {
     width: '80%',
     marginVertical: 10,
-    paddingVertical: 2,
+    paddingVertical: 2
+    
   },
-  button1: {
-    width: '150%',
-    marginVertical: 10,
-    paddingVertical: 2,
-  },
+ 
   text: {
     fontWeight: 'bold',
     fontSize: 15,

@@ -66,7 +66,7 @@ const UserScreen = ({ navigation }) => {
         error={!!Username.error}
         errorText={Username.error}
       />
-     <SafeAreaView style={styles.row}>
+     
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -83,14 +83,14 @@ const UserScreen = ({ navigation }) => {
       <Button
         mode="contained"
         
-        style={{ width: '30%',height: '50%',
-        marginLeft: 35,
+        style={{ width: '40%',height: '5%',
+        marginLeft: 450, marginTop:-50,
         paddingVertical: 1,fontWeight: 'bold',
         color: theme.colors.primary, }}
       >
         Verify
       </Button>
-      </SafeAreaView>
+   
       <TextInput
         label="Password"
         returnKeyType="done"
@@ -102,7 +102,8 @@ const UserScreen = ({ navigation }) => {
         
       />
       <Button
-        Style={styles.button1}
+        mode="contained"
+        Style={styles.button}
         onPress={onSignUpPressed}
         
       >
@@ -122,7 +123,7 @@ const UserScreen = ({ navigation }) => {
 const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
-    marginTop: 4,
+    marginTop: 30,
     
   },
   link: {

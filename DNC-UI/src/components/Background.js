@@ -2,6 +2,7 @@ import React from 'react'
 import { ImageBackground, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { theme } from '../core/theme'
 import HeaderFooter from '../components/HeaderFooter'
+import Footer from '../components/Footer'
 const Background = ({ children }) => (
   
   <ImageBackground
@@ -12,7 +13,7 @@ const Background = ({ children }) => (
     <KeyboardAvoidingView style={styles.container} behavior="padding">
       {children}
     </KeyboardAvoidingView>
-    <HeaderFooter>kjj</HeaderFooter>
+    <Footer></Footer>
   </ImageBackground>
   
 )
