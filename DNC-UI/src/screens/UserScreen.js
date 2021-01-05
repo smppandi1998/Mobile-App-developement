@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity ,SafeAreaView} from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -11,7 +11,7 @@ import { theme } from '../core/theme'
 import { emailValidator } from '../helpers/emailValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 import { nameValidator } from '../helpers/nameValidator'
-
+import * as MailComposer from "expo-mail-composer"
 const UserScreen = ({ navigation }) => {
   console.log('user');
   const [Username, setUsername] = useState({ value: '', error: '' })
@@ -24,19 +24,24 @@ const UserScreen = ({ navigation }) => {
     const passwordError = passwordValidator(password.value)
     const ClientnameError = nameValidator(Clientname.value)
     if (emailError || passwordError || UsernameError||ClientnameError) {
-      setUsername({ ...Username, error: nameError })
+      setUsername({ ...Username, error: UsernameError })
       setEmail({ ...email, error: emailError })
       setPassword({ ...password, error: passwordError })
       setClientname({ ...Clientname, error: ClientnameError })
       return
     }
+    MailComposer.composeAsync({
+      recipients: ['muthupandip1998@gmail.com'], // array of email addresses
+      subject: "MCCI OPT",
+      body: "1213333123"
+    })
     console.log(Username.value);
     console.log(password.value);
     console.log(email.value);
     console.log(Clientname.value);
     navigation.reset({
       index: 0,
-      routes: [{ name: 'Dashboard' }],
+      routes: [{ name: 'Otp' }],
     })
   }
 
@@ -61,6 +66,7 @@ const UserScreen = ({ navigation }) => {
         error={!!Username.error}
         errorText={Username.error}
       />
+     <SafeAreaView style={styles.row}>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -73,6 +79,18 @@ const UserScreen = ({ navigation }) => {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
+      
+      <Button
+        mode="contained"
+        
+        style={{ width: '30%',height: '50%',
+        marginLeft: 35,
+        paddingVertical: 1,fontWeight: 'bold',
+        color: theme.colors.primary, }}
+      >
+        Verify
+      </Button>
+      </SafeAreaView>
       <TextInput
         label="Password"
         returnKeyType="done"
@@ -81,11 +99,12 @@ const UserScreen = ({ navigation }) => {
         error={!!password.error}
         errorText={password.error}
         secureTextEntry
+        
       />
       <Button
-        mode="contained"
+        Style={styles.button1}
         onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
+        
       >
         Sign Up
       </Button>
@@ -104,6 +123,7 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     marginTop: 4,
+    
   },
   link: {
     fontWeight: 'bold',

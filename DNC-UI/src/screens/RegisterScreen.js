@@ -81,6 +81,14 @@ const RegisterScreen = ({ navigation }) => {
         error={!!Username.error}
         errorText={name.error}
       />
+       <Button
+        mode="contained"
+        onPress={onSignUpPressed}
+        style={{ marginTop: 24 }}
+      >
+        Sign Up
+      </Button>
+      <View style={styles.row}>
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -93,6 +101,7 @@ const RegisterScreen = ({ navigation }) => {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
+      </View>
       <TextInput
         label="Password"
         returnKeyType="done"
