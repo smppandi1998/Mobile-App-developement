@@ -6,12 +6,14 @@ import Logo from '../components/Logo'
 import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
+import HeaderFooter from '../components/HeaderFooter'
 import BackButton from '../components/BackButton'
 import { theme } from '../core/theme'
 import { nameValidator } from '../helpers/nameValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 
 const LoginScreen = ({ navigation }) => {
+  
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
 
@@ -84,7 +86,7 @@ const LoginScreen = ({ navigation }) => {
   
     <Background>
       
-	 
+    
 	
       <Logo />
       <Header>DNC</Header>
@@ -100,14 +102,14 @@ const LoginScreen = ({ navigation }) => {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
-      <TextInput
+      <TextInput 
         label="Password"
         returnKeyType="done"
         value={password.value}
         onChangeText={(text) => setPassword({ value: text, error: '' })}
         error={!!password.error}
         errorText={password.error}
-        secureTextEntry
+      
       />
       <View style={styles.forgotPassword}>
         <TouchableOpacity

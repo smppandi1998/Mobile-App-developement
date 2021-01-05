@@ -4,7 +4,7 @@ import { NavigationContainer } from '@react-navigation/native'
 import { createStackNavigator } from '@react-navigation/stack'
 import { theme } from './src/core/theme'
 import {
- // StartScreen,
+  Otp,
   LoginScreen,
   RegisterScreen,
   ForgotPasswordScreen,
@@ -22,6 +22,7 @@ const App = () => {
           initialRouteName="LoginScreen"
           screenOptions={{
             headerShown: false,
+            
           }}
         >
           
@@ -29,6 +30,8 @@ const App = () => {
           <Stack.Screen name="RegisterScreen" component={RegisterScreen} />
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="UserScreen" component={UserScreen} />
+          <Stack.Screen name="Otp" component={Otp} />
+         
           <Stack.Screen
             name="ForgotPasswordScreen"
             component={ForgotPasswordScreen}
