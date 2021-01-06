@@ -71,7 +71,8 @@ const RegisterScreen = ({ navigation }) => {
         returnKeyType="next"
         value={Orgname.value}
         onChangeText={(text) => setOrgname({ value: text, error: '' })}
-        
+        error={!!Orgname.error}
+        errorText={Orgname.error}
       />
       <TextInput
         label="User Name"
@@ -79,16 +80,9 @@ const RegisterScreen = ({ navigation }) => {
         value={Username.value}
         onChangeText={(text) => setUsername({ value: text, error: '' })}
         error={!!Username.error}
-        errorText={name.error}
+        errorText={Username.error}
       />
-       <Button
-        mode="contained"
-        onPress={onSignUpPressed}
-        style={{ marginTop: 24 }}
-      >
-        Sign Up
-      </Button>
-      <View style={styles.row}>
+      
       <TextInput
         label="Email"
         returnKeyType="next"
@@ -101,7 +95,6 @@ const RegisterScreen = ({ navigation }) => {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
-      </View>
       <TextInput
         label="Password"
         returnKeyType="done"

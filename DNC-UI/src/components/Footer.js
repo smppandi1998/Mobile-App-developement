@@ -1,20 +1,22 @@
 import React from 'react';
-
+import { Text } from 'react-native-paper'
+import {  View } from 'react-native'
 class Footer extends React.Component
 {
   render()
   {
     return (
       
-      <div  style={{overflow: 'hidden',
+      <View   style={{overflow: 'hidden',
         backgroundColor: '#f1f1f1',
-        padding: '20px 10px'}}>
+        paddingHorizontal:'2%',
+        paddingVertical:'2%'}}>
       
-      <div >
-        <p style={{marginLeft:850,fontSize:20}}>Data collection</p>
+     
+        <Text style={{fontSize:20,color:'#800080'}}>Copyright © MCCI interconnect sollutions. All rights reserved.</Text>
         
-      </div>
-    </div>
+       
+    </View >
     )
   }
 }

@@ -28,7 +28,7 @@ const LoginScreen = ({ navigation }) => {
     }
     console.log(email.value);
     console.log(password.value);
-	  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+{/*	  const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://staging-iseechange.mcci.mobi/dncbe/version";
     fetch(proxyurl + url, {
       method: 'GET'
@@ -42,7 +42,7 @@ const LoginScreen = ({ navigation }) => {
    })
    .catch((error) => {
       console.error(error);
-   });
+   });*/}
     navigation.reset({
       index: 0,
       routes: [{ name: 'Dashboard' }],
@@ -123,7 +123,7 @@ const LoginScreen = ({ navigation }) => {
         Login
       </Button>
       <View style={styles.row}>
-        <Text>Don’t have an account? </Text>
+        <Text style={{color:'white'}}>Don’t have an account? </Text>
         <TouchableOpacity onPress={onSignupPressed}>
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
@@ -136,9 +136,10 @@ const LoginScreen = ({ navigation }) => {
 
 const styles = StyleSheet.create({
   forgotPassword: {
-    width: '100%',
+    width:'100%',
     alignItems: 'flex-end',
     marginBottom: 24,
+    
   },
   row: {
     flexDirection: 'row',
@@ -146,12 +147,12 @@ const styles = StyleSheet.create({
   },
   forgot: {
     fontSize: 13,
-    color: theme.colors.secondary,
+    color: theme.colors.third,
   },
 
   link: {
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    color: theme.colors.third,
   },
 })
 
