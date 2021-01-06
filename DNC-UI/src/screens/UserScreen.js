@@ -30,11 +30,7 @@ const UserScreen = ({ navigation }) => {
       setClientname({ ...Clientname, error: ClientnameError })
       return
     }
-    MailComposer.composeAsync({
-      recipients: ['muthupandip1998@gmail.com'], // array of email addresses
-      subject: "MCCI OPT",
-      body: "1213333123"
-    })
+   
     console.log(Username.value);
     console.log(password.value);
     console.log(email.value);
@@ -56,7 +52,8 @@ const UserScreen = ({ navigation }) => {
         returnKeyType="next"
         value={Clientname.value}
         onChangeText={(text) => setClientname({ value: text, error: '' })}
-        
+        error={!!Clientname.error}
+        errorText={Clientname.error}
       />
       <TextInput
         label="User Name"
@@ -83,8 +80,8 @@ const UserScreen = ({ navigation }) => {
       <Button
         mode="contained"
         
-        style={{ width: '40%',height: '5%',
-        marginLeft: 450, marginTop:-50,
+        style={{ width: 100,height: 40,
+        marginLeft: 450, marginTop:-65,
         paddingVertical: 1,fontWeight: 'bold',
         color: theme.colors.primary, }}
       >
