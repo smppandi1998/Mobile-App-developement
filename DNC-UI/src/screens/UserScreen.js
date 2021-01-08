@@ -80,10 +80,11 @@ const UserScreen = ({ navigation }) => {
       <Button
         mode="contained"
         
-        style={{ width: 100,height: 40,
+        style={{ width: 100,height: 50,
         marginLeft: 450, marginTop:-65,
         paddingVertical: 1,fontWeight: 'bold',
         color: theme.colors.primary, }}
+        onPress={onSignUpPressed}
       >
         Verify
       </Button>
@@ -107,7 +108,7 @@ const UserScreen = ({ navigation }) => {
         Sign Up
       </Button>
       <View style={styles.row}>
-        <Text>Already have an account? </Text>
+        <Text style={{color:'white'}}>Already have an account? </Text>
         <TouchableOpacity onPress={() => navigation.replace('LoginScreen')}>
           <Text style={styles.link}>Login</Text>
         </TouchableOpacity>
@@ -125,7 +126,7 @@ const styles = StyleSheet.create({
   },
   link: {
     fontWeight: 'bold',
-    color: theme.colors.primary,
+    color: theme.colors.third,
   },
 })
 

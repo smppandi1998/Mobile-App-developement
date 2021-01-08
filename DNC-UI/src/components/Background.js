@@ -1,5 +1,5 @@
 import React from 'react'
-import { ImageBackground, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import { ImageBackground, StyleSheet, KeyboardAvoidingView ,ScrollView} from 'react-native'
 import { theme } from '../core/theme'
 import HeaderFooter from '../components/HeaderFooter'
 import Footer from '../components/Footer'
@@ -10,7 +10,8 @@ const Background = ({ children }) => (
     //resizeMode="repeat"
     style={styles.background}
   >
-    <KeyboardAvoidingView style={styles.container} behavior="padding">
+    
+    <KeyboardAvoidingView  keyboardVerticalOffset={0} style={styles.container} behavior="padding">
       {children}
     </KeyboardAvoidingView>
     

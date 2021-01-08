@@ -5,13 +5,14 @@ import Logo from '../components/Logo'
 import Header from '../components/Header'
 import TextInput from '../components/TextInput'
 import Button from '../components/Button'
-import { emailValidator } from '../helpers/emailValidator'
+import { otpValidator } from '../helpers/otpValidator'
+//import { emailValidator } from '../helpers/emailValidator'
 
 const Otp = ({ navigation }) => {
   const [email, setEmail] = useState({ value: '', error: '' })
 
   const sendResetPasswordEmail = () => {
-    const emailError = emailValidator(email.value)
+    const emailError =otpValidator(email.value)
     if (emailError) {
       setEmail({ ...email, error: emailError })
       return
@@ -23,7 +24,7 @@ const Otp = ({ navigation }) => {
     <Background>
       <BackButton goBack={navigation.goBack} />
       <Logo />
-      <Header>Email verfication</Header>
+      <Header>Check your mail</Header>
       <TextInput
         label="Enter OTP"
         returnKeyType="done"
@@ -40,7 +41,7 @@ const Otp = ({ navigation }) => {
         onPress={sendResetPasswordEmail}
         style={{ marginTop: 16 }}
       >
-        Send Instructions
+        Submit
       </Button>
     </Background>
   )

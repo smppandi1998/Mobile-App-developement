@@ -1,5 +1,5 @@
 import React, { useState} from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, View} from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -50,9 +50,9 @@ const LoginScreen = ({ navigation }) => {
   }
   const onSignupPressed = () => {
    
-	  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+	//  const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://staging-iseechange.mcci.mobi/dncbe/signup";
-    fetch(proxyurl + url, {
+    fetch(url, {
       method: 'POST'
    })
    .then((response) => response.json())
@@ -63,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
       const result="Welcome Admin"
       
       
-      if (responseJson.message===result)
+      if (responseJson.message==result)
        {
     navigation.reset({
       index: 0,
@@ -88,7 +88,9 @@ const LoginScreen = ({ navigation }) => {
     <Background>
       
     
-	
+
+
+    
       <Logo />
       <Header>DNC</Header>
       <TextInput
@@ -103,7 +105,7 @@ const LoginScreen = ({ navigation }) => {
         textContentType="emailAddress"
         keyboardType="email-address"
       />
-      <TextInput 
+      <TextInput style={{color:'white'}}
         label="Password"
         returnKeyType="done"
         value={password.value}
@@ -128,7 +130,7 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-	
+     
     </Background>
 	
   )
