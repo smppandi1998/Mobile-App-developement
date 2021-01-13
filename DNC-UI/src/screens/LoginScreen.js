@@ -1,5 +1,6 @@
 import React, { useState} from 'react'
-import { TouchableOpacity, StyleSheet, View } from 'react-native'
+import { TouchableOpacity, StyleSheet, View} from 'react-native'
+import { Picker} from '@react-native-picker/picker'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
@@ -14,10 +15,66 @@ import { nameValidator } from '../helpers/nameValidator'
 import { passwordValidator } from '../helpers/passwordValidator'
 
 const LoginScreen = ({ navigation }) => {
-  
+  const country=[];
+  const selectedValue='';
   const [email, setEmail] = useState({ value: '', error: '' })
   const [password, setPassword] = useState({ value: '', error: '' })
+  const [state,setState] = useState({country, error: '' })
+ 
 
+//  const [selectedValue, setSelectedValue] = useState("java");
+	  
+
+    fetch("https://www.universal-tutorial.com/api/getaccesstoken", {
+      method: 'GET',
+      headers: {
+        "Accept": "application/json",
+    "api-token": "s9_CZlzJOJFkYK135BwB5XRCqFvcSEuRjThc02VXAWOuzJUEmbZnHkGQq88QnzI4fJo",
+    "user-email": "muthupandip.mcci@gmail.com"
+      }
+   })
+   .then((response) => response.json())
+   .then((responseJson) => {
+      
+      const auth_token=responseJson.auth_token;
+      const example= "Bearer "+auth_token+"";
+      console.log(example);
+      console.log(auth_token);
+      fetch("https://www.universal-tutorial.com/api/countries/", {
+        method: 'GET',
+        headers: {
+          "Authorization":  "Bearer "+auth_token+"",
+          "Accept": "application/json"
+        }
+     })
+     .then((response) => response.json())
+     .then((responseJson) => {
+       
+      for (let i=0;i<responseJson.length;i++)
+       {
+        const data=responseJson[i].country_name;
+        country.push(data);
+      
+       }
+      
+     
+       setState(country ); 
+       console.log(country);
+     })
+     .catch((error) => {
+        console.error(error);
+     });
+     
+   })
+   .catch((error) => {
+      console.error(error);
+   });
+
+
+   
+  
+   
+  
   const onLoginPressed = () => {
     const emailError = nameValidator(email.value)
     const passwordError = passwordValidator(password.value)
@@ -50,9 +107,9 @@ const LoginScreen = ({ navigation }) => {
   }
   const onSignupPressed = () => {
    
-	  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+	//  const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://staging-iseechange.mcci.mobi/dncbe/signup";
-    fetch(proxyurl + url, {
+    fetch(url, {
       method: 'POST'
    })
    .then((response) => response.json())
@@ -63,7 +120,7 @@ const LoginScreen = ({ navigation }) => {
       const result="Welcome Admin"
       
       
-      if (responseJson.message===result)
+      if (responseJson.message==result)
        {
     navigation.reset({
       index: 0,
@@ -88,7 +145,9 @@ const LoginScreen = ({ navigation }) => {
     <Background>
       
     
-	
+
+
+    
       <Logo />
       <Header>DNC</Header>
       <TextInput
@@ -128,7 +187,16 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-	
+      <Picker
+        selectedValue={selectedValue}
+        style={{ height: 50, width: 150 }}
+        onValueChange={(itemValue, itemIndex) => setState({selectedValue: itemValue})} >
+                { state.country.map((item, key)=>
+                  <Picker.Item label={item.name} value={item.name} key={key} />
+                )}
+         
+      </Picker>
+     
     </Background>
 	
   )
