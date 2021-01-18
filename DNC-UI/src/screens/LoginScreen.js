@@ -187,7 +187,7 @@ const LoginScreen = ({ navigation }) => {
           <Text style={styles.link}>Sign up</Text>
         </TouchableOpacity>
       </View>
-      <Picker
+     {/* <Picker
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
         onValueChange={(itemValue, itemIndex) => setState({selectedValue: itemValue})} >
@@ -195,7 +195,7 @@ const LoginScreen = ({ navigation }) => {
                   <Picker.Item label={item.name} value={item.name} key={key} />
                 )}
          
-      </Picker>
+                </Picker>*/}
      
     </Background>
 	
