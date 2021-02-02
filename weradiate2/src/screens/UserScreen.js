@@ -1,9 +1,9 @@
 import React, { useState } from 'react'
-import { View, StyleSheet, TouchableOpacity ,SafeAreaView,Alert} from 'react-native'
+import { View, StyleSheet, TouchableOpacity ,SafeAreaView} from 'react-native'
 import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
-import Header from '../components/Header1'
+import Header from '../components/Header'
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import BackButton from '../components/BackButton'
@@ -23,13 +23,6 @@ const UserScreen = ({ navigation }) => {
     const emailError = emailValidator(email.value)
     const passwordError = passwordValidator(password.value)
     const ClientnameError = nameValidator(Clientname.value)
-    let passlen=password.value
-    alert(passlen.length )
-    if(passlen.length < 8 )
-    {
-      setPassword({ ...email, error: "Password should be 8 characters" })
-      return
-    }
     if (emailError || passwordError || UsernameError||ClientnameError) {
       setUsername({ ...Username, error: UsernameError })
       setEmail({ ...email, error: emailError })
@@ -37,53 +30,15 @@ const UserScreen = ({ navigation }) => {
       setClientname({ ...Clientname, error: ClientnameError })
       return
     }
-        
+   
     console.log(Username.value);
     console.log(password.value);
     console.log(email.value);
     console.log(Clientname.value);
-    var data={
-      "cname":Clientname.value,
-      "uname": Username.value,
-      "pwd": password.value,
-      "email":email.value
-    }
-	  const proxyurl = "https://cors-anywhere.herokuapp.com/";
-    const url = "https://staging-analytics.weradiate.com/apidbm/signup-user";
-    fetch(proxyurl + url, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-
-      },
-      body:  JSON.stringify(data)
-   })
-   .then((response) => 
-   response.json())
-   .then((responseJson) => {
-      console.log(responseJson);
-      alert(responseJson['cid']);
-        if(responseJson['cid']!==undefined) 
-        {
-          alert("Successfully created");
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'LoginScreen' }],
-             }) 
-        }
-        else{
-          alert(JSON.stringify(responseJson));
-          navigation.reset({
-            index: 0,
-            routes: [{ name: 'UserScreen' }],
-             }) 
-        }
-   })
-   .catch((error) => {
-      console.error(error);
-   });
-    
+    navigation.reset({
+      index: 0,
+      routes: [{ name: 'Otp' }],
+    })
   }
 
   return (
@@ -122,7 +77,17 @@ const UserScreen = ({ navigation }) => {
         keyboardType="email-address"
       />
       
-      
+      <Button
+        mode="contained"
+        
+        style={{ width: 100,height: 50,
+        marginLeft: 450, marginTop:-65,
+        paddingVertical: 1,fontWeight: 'bold',
+        color: theme.colors.primary, }}
+        onPress={onSignUpPressed}
+      >
+        Verify
+      </Button>
    
       <TextInput
         label="Password"
