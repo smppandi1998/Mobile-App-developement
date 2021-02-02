@@ -1,4 +1,4 @@
-import React, {useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Background from '../components/Background'
 import BackButton from '../components/BackButton'
 import Logo from '../components/Logo'
@@ -11,12 +11,11 @@ const ForgotPasswordScreen = ({ navigation }) => {
    global.country=[];
   const [email, setEmail] = useState({ value: '', error: '' })
  
-  const [selectedValue, setSelectedValue] = useState("");
-	const [data, setData] = useState([]);
+  const [selectedValue, setSelectedValue] = useState(0);
+	  
   
   
-  
-  const fetchData =() =>{
+  alert("muthu");
   fetch("https://www.universal-tutorial.com/api/getaccesstoken", {
       method: 'GET',
       headers: {
@@ -41,22 +40,21 @@ const ForgotPasswordScreen = ({ navigation }) => {
      })
      .then((response) => response.json())
      .then((responseJson) => {
-     //  console.log(JSON.stringify(responseJson.country_name));
+       console.log(country);
       for (var i=0;i<responseJson.length;i++)
       {
-       const json=responseJson[i].country_name;
-      // country[''+i]=data;
-      // console.log(i);
-       country.push(json);
-     // console.log(data);
-     // setData(json)
+       const data=responseJson[i].country_name;
+       //country[''+i]=data;
+       console.log(i);
+       country.push(data);
+      console.log(data);
       
       
-      }
+       }
        
-      setData(country)
-      
+    // setSelectedValue(country)
        
+       console.log(country);
      })
      .catch((error) => {
         console.error(error);
@@ -66,10 +64,9 @@ const ForgotPasswordScreen = ({ navigation }) => {
    .catch((error) => {
       console.error(error);
    });
-  }
-  useEffect(() => {
-    fetchData();
-}, []);
+   //setSelectedValue(country)
+   alert (country);
+ 
   const sendResetPasswordEmail = () => {
     const emailError = emailValidator(email.value)
     if (emailError) {
@@ -78,7 +75,7 @@ const ForgotPasswordScreen = ({ navigation }) => {
     }
     navigation.navigate('LoginScreen')
   }
- 
+  alert(JSON.stringify(country))
   return (
     
     <Background>
@@ -109,10 +106,10 @@ const ForgotPasswordScreen = ({ navigation }) => {
       <Picker
         selectedValue={selectedValue}
         style={{ height: 50, width: 150 }}
-        onValueChange={(value) => setSelectedValue({selectedValue: value}) } >
+        onValueChange={(itemValue) => setSelectedValue({selectedValue: itemValue}) } >
               
-              {data.map((value,key) => {
-        return (<Picker.Item label={value} value={value} key={key}/>) 
+              {country.map((item, index) => {
+        return (<Picker.Item label={item} value={index} key={index}/>) 
     })}
                 </Picker>
     </Background>

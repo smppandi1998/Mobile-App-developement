@@ -5,7 +5,7 @@ import { Text } from 'react-native-paper'
 import Background from '../components/Background'
 import Logo from '../components/Logo'
 import Header from '../components/Header'
-
+import { AsyncStorage } from 'react-native';
 import Button from '../components/Button'
 import TextInput from '../components/TextInput'
 import HeaderFooter from '../components/HeaderFooter'
@@ -16,15 +16,14 @@ import { passwordValidator } from '../helpers/passwordValidator'
 
 const LoginScreen = ({ navigation }) =>  {
   const country=[];
+  const Api_Token="";
   
   let [email, setEmail] = useState({ value: '', error: '' })
   let [password, setPassword] = useState({ value: '', error: '' })
   
  
 
-  
 
-   
   
    
   
@@ -44,9 +43,9 @@ const LoginScreen = ({ navigation }) =>  {
       "pwd": password.value
       
     }
-	  const proxyurl = "https://cors-anywhere.herokuapp.com/";
+	 // const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = "https://staging-analytics.weradiate.com/apidbm/dlogin";
-    fetch(proxyurl + url, {
+    fetch( url, {
       method: 'POST',
       headers: {
         Accept: 'application/json',
@@ -58,6 +57,7 @@ const LoginScreen = ({ navigation }) =>  {
    .then((response) => response.json())
    .then((responseJson) => {
       console.log(responseJson);
+      
       const result="User ID and Password is not valid"
       if (responseJson.message==result)
        {
@@ -68,6 +68,11 @@ const LoginScreen = ({ navigation }) =>  {
       alert(result)
       }
       else{
+       const token=JSON.stringify(responseJson['token'])
+       console.log(token);
+      
+       localStorage.setItem('token', token);
+    
       navigation.reset({
         index: 0,
         routes: [{ name: 'Dashboard' }],
@@ -157,7 +162,7 @@ const LoginScreen = ({ navigation }) =>  {
       </View>
       <Button mode="contained" onPress={onLoginPressed}>
         Login
-      </Button>
+      </Button>                                                                                                                                                                                                                                                                                                                                                                     
       <View style={styles.row}>
         <Text style={{color:'white'}}>Don’t have an account? </Text>
         <TouchableOpacity onPress={onSignupPressed}>
