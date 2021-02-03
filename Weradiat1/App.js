@@ -9,7 +9,8 @@ import {
   RegisterScreen,
   ForgotPasswordScreen,
   Dashboard,
-  UserScreen,practice
+  UserScreen,
+  ClientScreen,Device
 } from './src/screens'
 
 const Stack = createStackNavigator()
@@ -32,7 +33,8 @@ export default class App extends React.Component{
           <Stack.Screen name="Dashboard" component={Dashboard} />
           <Stack.Screen name="UserScreen" component={UserScreen} />
           <Stack.Screen name="Otp" component={Otp} />
-          <Stack.Screen name="practice" component={practice} />
+          <Stack.Screen name="ClientScreen" component={ClientScreen} />
+          <Stack.Screen name="Device" component={Device} />
           <Stack.Screen
             name="ForgotPasswordScreen"
             component={ForgotPasswordScreen}

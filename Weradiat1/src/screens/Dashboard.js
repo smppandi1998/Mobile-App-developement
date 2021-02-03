@@ -4,14 +4,7 @@ import TextInput from '../components/TextInput'
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import UserTable from '../components/UserTable';
 import Button from '../components/Button'
-import {
-   
-   
-   Dialog,
-   Portal,
-
-   
- } from 'react-native-paper';
+import {Dialog,Portal} from 'react-native-paper';
 
 
 
@@ -22,13 +15,38 @@ import {
    let [email, setEmail] = useState({ value: '', error: '' })
    let [password, setPassword] = useState({ value: '', error: '' })
    let [username, setUsername] = useState({ value: '', error: '' })
-   const [inputVal, setInputVal] = useState('test');
+  // const [inputVal, setInputVal] = useState('test');
    const [isDialogVisible, setIsDialogVisible] = useState(false);
+   const [ClientVisible, setIsclientVisible] = React.useState(false);
    const [data, setData] = useState([]); 
    const [selectedValue, setselectedValue] = useState(""); 
   
    const clients=[];
    const Api=  localStorage.getItem('token');
+   const NavigatClientScreen =() =>
+   {
+      
+      navigation.reset({
+         index: 0,
+         routes: [{ name: 'ClientScreen' }],
+          })
+   }
+   const NavigatUserScreen =() =>
+   {
+      
+      navigation.reset({
+         index: 0,
+         routes: [{ name: 'Dashboard' }],
+          })
+   }
+   const NavigatDeviceScreen =() =>
+   {
+      
+      navigation.reset({
+         index: 0,
+         routes: [{ name: 'Device' }],
+          })
+   }
    console.log(Api)
    const fetchData =() =>{
      
@@ -55,7 +73,7 @@ import {
             }
             
           setData(clients)
-           
+         localStorage.setItem('clients',clients); 
            
          })
          .catch((error) => {
@@ -67,11 +85,8 @@ import {
       useEffect(() => {
         fetchData();
     }, []);
-   const onAdduser = () => {
-      alert("Add user");
-   }
+ 
   
-
 
  return(
  
@@ -79,10 +94,10 @@ import {
  <View style={styles.container}>
  
 
-<TouchableOpacity ><Text style={styles.touchopacity}>User</Text></TouchableOpacity>
-<TouchableOpacity><Text style={styles.touchopacity}>Client</Text></TouchableOpacity>
+<TouchableOpacity  ><Text  onPress={() => setIsclientVisible(true)} onPress={NavigatUserScreen} style={styles.touchopacity}>User</Text></TouchableOpacity>
+<TouchableOpacity ><Text  onDismiss={() => setIsclientVisible(false)} visible={ClientVisible} onPress={NavigatClientScreen}style={styles.touchopacity}>Client</Text></TouchableOpacity>
 <TouchableOpacity><Text style={styles.touchopacity}>Configuration</Text></TouchableOpacity>
-<TouchableOpacity><Text style={styles.touchopacity}>Device</Text></TouchableOpacity>
+<TouchableOpacity><Text onPress={NavigatDeviceScreen} style={styles.touchopacity}>Device</Text></TouchableOpacity>
 
 </View>
 <Button mode="contained" style={styles.button} onPress={() => setIsDialogVisible(true)}>Add user</Button>
@@ -93,7 +108,7 @@ import {
             visible={isDialogVisible}
             onDismiss={() => setIsDialogVisible(false)}>
             <Dialog.Title style={{marginLeft: 'auto',
-      marginRight: 'auto'}}>UserTable</Dialog.Title>
+      marginRight: 'auto'}}>Add User</Dialog.Title>
             <Dialog.Content style={{marginLeft: 'auto',
       marginRight: 'auto'}}>
             <Picker
