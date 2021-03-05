@@ -1,12 +1,21 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, Alert, Picker } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Text,
+  Alert,
+  Picker,
+  TouchableOpacity,
+} from 'react-native'
 import TextInput from '../components/TextInput'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import UserTable from '../components/UserTable'
+//import { TouchableOpacity } from 'react-native-gesture-handler'
+import UserTable from '../components/DeviceTable'
 import Button from '../components/Button'
 import { Dialog, Portal } from 'react-native-paper'
+// import DateTimePickerModal from "react-native-modal-datetime-picker";
+// import DateTimePicker from 'react-datetime-picker';
 
-const Device = ({ navigation }) => {
+const RegisterDevice = ({ navigation }) => {
   let [email, setEmail] = useState({ value: '', error: '' })
   let [password, setPassword] = useState({ value: '', error: '' })
   let [username, setUsername] = useState({ value: '', error: '' })
@@ -15,6 +24,38 @@ const Device = ({ navigation }) => {
   const [ClientVisible, setIsclientVisible] = React.useState(false)
   const [data, setData] = useState([])
   const [selectedValue, setselectedValue] = useState('')
+  //const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const uname = localStorage.getItem('uname')
+  const [value, onChange] = useState(new Date())
+  alert(value)
+
+  // const showDatePicker = () => {
+  //   setDatePickerVisibility(true);
+  // };
+
+  // const hideDatePicker = () => {
+  //   setDatePickerVisibility(false);
+  // };
+
+  // const handleConfirm = (date) => {
+  //   console.warn("A date has been picked: ", date);
+  //   hideDatePicker();
+  // };
+
+  const Logutmodule = ({ selectedValue }) => {
+    if (selectedValue == 'Logout') {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'LoginScreen' }],
+      })
+    }
+    if (selectedValue == 'User') {
+      navigation.reset({
+        index: 0,
+        routes: [{ name: 'User_management' }],
+      })
+    }
+  }
 
   const clients = []
   const Api = localStorage.getItem('token')
@@ -66,6 +107,36 @@ const Device = ({ navigation }) => {
     fetchData()
   }, [])
 
+  const Adduser = () => {
+    setIsDialogVisible(false)
+
+    var url = 'https://staging-analytics.weradiate.com/apidbm/cuser'
+    const putMethod = {
+      method: 'POST',
+      headers: {
+        'Content-type': 'application/json',
+        Accept: 'application/json',
+        Authorization: 'Bearer ' + Api.replace(/['"]+/g, '') + '',
+      },
+      body: JSON.stringify({
+        cname: selectedValue,
+        uname: username.value,
+        pwd: password.value,
+        email: email.value,
+      }),
+    }
+
+    fetch(url, putMethod)
+      .then(response => response.json())
+      .then(responseJson => {
+        alert(JSON.stringify(responseJson))
+        navigation.reset({
+          index: 0,
+          routes: [{ name: 'Dashboard' }],
+        })
+      })
+  }
+
   return (
     <View>
       <View style={styles.container}>
@@ -89,13 +160,27 @@ const Device = ({ navigation }) => {
           </Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.touchopacity}>Configuration</Text>
+          <Text style={styles.touchopacity}>Configure Field</Text>
         </TouchableOpacity>
         <TouchableOpacity>
-          <Text style={styles.touchopacity} onPress={NavigatDeviceScreen}>
-            Device
+          <Text onPress={NavigatDeviceScreen} style={styles.touchopacity}>
+            Register Device
           </Text>
         </TouchableOpacity>
+        <TouchableOpacity>
+          <Text onPress={NavigatDeviceScreen} style={styles.touchopacity}>
+            Configure Device
+          </Text>
+        </TouchableOpacity>
+        <Picker
+          style={styles.picker}
+          selectedValue={selectedValue}
+          onValueChange={selectedValue => Logutmodule({ selectedValue })}
+        >
+          <Picker.Item label={uname} value={uname} />
+          <Picker.Item label="Logout" value="Logout" />
+          <Picker.Item label="User Mangement" value="User" />
+        </Picker>
       </View>
       <Button
         mode="contained"
@@ -104,27 +189,7 @@ const Device = ({ navigation }) => {
       >
         Add Device
       </Button>
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => setIsDialogVisible(true)}
-      >
-        Remove Device
-      </Button>
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => setIsDialogVisible(true)}
-      >
-        Replace Device
-      </Button>
-      <Button
-        mode="contained"
-        style={styles.button}
-        onPress={() => setIsDialogVisible(true)}
-      >
-        Add Device
-      </Button>
+      <UserTable />
       <Portal>
         <Dialog
           style={{
@@ -163,7 +228,7 @@ const Device = ({ navigation }) => {
               ))}
             </Picker>
             <TextInput
-              label="User name"
+              label="Enter Hardware ID"
               returnKeyType="next"
               value={username.value}
               onChangeText={text => setUsername({ value: text, error: '' })}
@@ -174,8 +239,21 @@ const Device = ({ navigation }) => {
               textContentType="Text"
               keyboardType="Text"
             />
+            <Picker
+              selectedValue={selectedValue}
+              style={{
+                width: '100%',
+
+                marginVertical: 12,
+              }}
+              onValueChange={itemValue => setselectedValue(itemValue)}
+            >
+              {data.map((value, key) => (
+                <Picker.Item label={value} value={value} key={key} />
+              ))}
+            </Picker>
             <TextInput
-              label="Password"
+              label="Enter Device ID"
               returnKeyType="done"
               value={password.value}
               onChangeText={text => setPassword({ value: text, error: '' })}
@@ -184,7 +262,7 @@ const Device = ({ navigation }) => {
               secureTextEntry
             />
             <TextInput
-              label="E-mail address"
+              label=""
               returnKeyType="done"
               value={email.value}
               onChangeText={text => setEmail({ value: text, error: '' })}
@@ -192,9 +270,8 @@ const Device = ({ navigation }) => {
               errorText={email.error}
               autoCapitalize="none"
               autoCompleteType="email"
-              textContentType="emailAddress"
-              keyboardType="email-address"
-              description="You will receive email with password reset link."
+              textContentType="datetime"
+              keyboardType="datetime"
             />
           </Dialog.Content>
           <Dialog.Actions>
@@ -207,7 +284,7 @@ const Device = ({ navigation }) => {
                 marginLeft: 'auto',
                 marginRight: 'auto',
               }}
-              onPress={() => setIsDialogVisible(false)}
+              onPress={Adduser}
             >
               Submit
             </Button>
@@ -238,7 +315,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   button: {
-    width: '15%',
+    width: '10%',
     marginVertical: 10,
     paddingVertical: 2,
     marginLeft: 'auto',
@@ -261,6 +338,12 @@ const styles = StyleSheet.create({
     fontSize: 20,
     padding: 10,
   },
+  picker: {
+    width: 100,
+    backgroundColor: '#FFF0E0',
+    borderColor: 'black',
+    borderWidth: 1,
+  },
 })
 
-export default Device
+export default RegisterDevice

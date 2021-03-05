@@ -37,15 +37,6 @@ const LoginScreen = ({ navigation }) => {
       pwd: password.value,
     }
 
-    const postmethod = {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(data),
-    }
-
     // const proxyurl = "https://cors-anywhere.herokuapp.com/";
     const url = 'https://staging-analytics.weradiate.com/apidbm/dlogin'
     fetch(url, {
@@ -72,7 +63,7 @@ const LoginScreen = ({ navigation }) => {
           console.log(token)
 
           localStorage.setItem('token', token)
-
+          localStorage.setItem('uname', email.value)
           navigation.reset({
             index: 0,
             routes: [{ name: 'Dashboard' }],

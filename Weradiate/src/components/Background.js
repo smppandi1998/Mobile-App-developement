@@ -6,7 +6,7 @@ import {
   ScrollView,
 } from 'react-native'
 import { theme } from '../core/theme'
-import HeaderFooter from '../components/HeaderFooter'
+
 import Footer from '../components/Footer'
 const Background = ({ children }) => (
   <ImageBackground
