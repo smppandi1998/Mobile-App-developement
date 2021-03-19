@@ -12,8 +12,8 @@ import TextInput from '../components/TextInput'
 import UserTable from '../components/DeviceTable'
 import Button from '../components/Button'
 import { Dialog, Portal } from 'react-native-paper'
-// import DateTimePickerModal from "react-native-modal-datetime-picker";
-// import DateTimePicker from 'react-datetime-picker';
+import Datetime from 'react-datetime'
+import 'react-datetime/css/react-datetime.css'
 
 const RegisterDevice = ({ navigation }) => {
   let [email, setEmail] = useState({ value: '', error: '' })
@@ -261,18 +261,7 @@ const RegisterDevice = ({ navigation }) => {
               errorText={password.error}
               secureTextEntry
             />
-            <TextInput
-              label=""
-              returnKeyType="done"
-              value={email.value}
-              onChangeText={text => setEmail({ value: text, error: '' })}
-              error={!!email.error}
-              errorText={email.error}
-              autoCapitalize="none"
-              autoCompleteType="email"
-              textContentType="datetime"
-              keyboardType="datetime"
-            />
+            <Datetime onChange={onChange} value={value} />
           </Dialog.Content>
           <Dialog.Actions>
             <Button

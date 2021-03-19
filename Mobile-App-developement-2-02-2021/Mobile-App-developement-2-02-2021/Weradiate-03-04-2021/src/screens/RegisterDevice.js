@@ -1,12 +1,19 @@
 import React, { useState, useEffect } from 'react'
-import { View, StyleSheet, Text, Alert, Picker } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Text,
+  Alert,
+  Picker,
+  TouchableOpacity,
+} from 'react-native'
 import TextInput from '../components/TextInput'
-import { TouchableOpacity } from 'react-native-gesture-handler'
-import UserTable from '../components/UserTable'
+//import { TouchableOpacity } from 'react-native-gesture-handler'
+import UserTable from '../components/DeviceTable'
 import Button from '../components/Button'
 import { Dialog, Portal } from 'react-native-paper'
-import DateTimePickerModal from 'react-native-modal-datetime-picker'
-import DateTimePicker from 'react-datetime-picker'
+//import Datetime from 'react-datetime';
+//import "react-datetime/css/react-datetime.css";
 
 const RegisterDevice = ({ navigation }) => {
   let [email, setEmail] = useState({ value: '', error: '' })
@@ -17,22 +24,23 @@ const RegisterDevice = ({ navigation }) => {
   const [ClientVisible, setIsclientVisible] = React.useState(false)
   const [data, setData] = useState([])
   const [selectedValue, setselectedValue] = useState('')
-  const [isDatePickerVisible, setDatePickerVisibility] = useState(false)
+  //const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const uname = localStorage.getItem('uname')
   const [value, onChange] = useState(new Date())
+  alert(value)
 
-  const showDatePicker = () => {
-    setDatePickerVisibility(true)
-  }
+  // const showDatePicker = () => {
+  //   setDatePickerVisibility(true);
+  // };
 
-  const hideDatePicker = () => {
-    setDatePickerVisibility(false)
-  }
+  // const hideDatePicker = () => {
+  //   setDatePickerVisibility(false);
+  // };
 
-  const handleConfirm = date => {
-    console.warn('A date has been picked: ', date)
-    hideDatePicker()
-  }
+  // const handleConfirm = (date) => {
+  //   console.warn("A date has been picked: ", date);
+  //   hideDatePicker();
+  // };
 
   const Logutmodule = ({ selectedValue }) => {
     if (selectedValue == 'Logout') {
@@ -253,22 +261,6 @@ const RegisterDevice = ({ navigation }) => {
               errorText={password.error}
               secureTextEntry
             />
-            <TextInput
-              label=""
-              returnKeyType="done"
-              value={email.value}
-              onChangeText={text => setEmail({ value: text, error: '' })}
-              error={!!email.error}
-              errorText={email.error}
-              autoCapitalize="none"
-              autoCompleteType="email"
-              textContentType="datetime"
-              keyboardType="datetime"
-            />
-            <View>
-              <Button title="Show Date Picker" onPress={showDatePicker} />
-              <DateTimePicker onChange={onChange} value={value} />
-            </View>
           </Dialog.Content>
           <Dialog.Actions>
             <Button

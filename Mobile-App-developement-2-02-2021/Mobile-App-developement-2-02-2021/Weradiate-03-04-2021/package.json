@@ -14,7 +14,7 @@
     "@react-navigation/native": "^5.8.10",
     "@react-navigation/stack": "^5.12.8",
     "bootstrap": "^4.6.0",
-    "expo": "~39.0.2",
+    "expo": "^40.0.1",
     "expo-constants": "~9.2.0",
     "expo-mail-composer": "~8.4.0",
     "expo-status-bar": "~1.0.2",

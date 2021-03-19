@@ -11,7 +11,7 @@ import {
   Dashboard,
   UserScreen,
   ClientScreen,
-  Device,
+  RegisterDevice,
   User_management,
 } from './src/screens'
 
@@ -34,7 +34,7 @@ export default class App extends React.Component {
             <Stack.Screen name="UserScreen" component={UserScreen} />
             <Stack.Screen name="Otp" component={Otp} />
             <Stack.Screen name="ClientScreen" component={ClientScreen} />
-            <Stack.Screen name="Device" component={Device} />
+            <Stack.Screen name="RegisterDevice" component={RegisterDevice} />
             <Stack.Screen name="User_management" component={User_management} />
             <Stack.Screen
               name="ForgotPasswordScreen"
